@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meals/data/categories_data.dart';
 
 import '../models/category_model.dart';
+import '../widgets/category_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -20,7 +21,10 @@ class CategoriesScreen extends StatelessWidget {
           childAspectRatio: 3 / 2,
         ),
         children: [
-          for (CategoryModel category in categoriesData) Text(category.title),
+          for (CategoryModel category in categoriesData)
+            CategoryGridItem(
+              category: category,
+            ),
         ],
       ),
     );
