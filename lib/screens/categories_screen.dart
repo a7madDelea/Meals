@@ -5,8 +5,11 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return  Scaffold(
+      appBar: AppBar(
+        title: const Text('Pick your category'),
+      ),
+      body: const Center(
         child: Text('Categories Screen'),
       ),
     );
