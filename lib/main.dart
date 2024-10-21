@@ -15,12 +15,14 @@ class MyApp extends StatelessWidget {
       title: 'Meals Application',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'PlaywriteGBS',
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
           seedColor: const Color.fromARGB(255, 132, 0, 51),
         ),
       ),
+      
       home: const CategoriesScreen(),
     );
   }
