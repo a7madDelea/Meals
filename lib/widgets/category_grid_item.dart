@@ -14,7 +14,9 @@ class CategoryGridItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (ctx) => const MealsScreen(),
+            builder: (ctx) => MealsScreen(
+              title: category.title,
+            ),
           ),
         );
       },
