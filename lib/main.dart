@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'screens/categories_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -19,11 +21,7 @@ class MyApp extends StatelessWidget {
           seedColor: const Color.fromARGB(255, 132, 0, 51),
         ),
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Initial Apllication'),
-        ),
-      ),
+      home: const CategoriesScreen(),
     );
   }
 }
