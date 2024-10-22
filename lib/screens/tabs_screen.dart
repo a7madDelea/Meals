@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/screens/filters_screen.dart';
 
 import '../models/meal_model.dart';
 import '../widgets/main_drawer.dart';
@@ -25,6 +26,12 @@ class _TabsScreenState extends State<TabsScreen> {
   void _onSelectPageFromDrawer(String id) {
     if (id == 'Filters') {
       Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (ctx) => const FiltersScreen(),
+        ),
+      );
     }
   }
 
