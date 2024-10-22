@@ -9,8 +9,11 @@ class MealDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(meal.title),
+      ),
+      body: const Center(
         child: Text('Meal Details Screen'),
       ),
     );
