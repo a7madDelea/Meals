@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/meal_model.dart';
 import '../widgets/meal_item.dart';
+import 'meal_details_screen.dart';
 
 class MealsScreen extends StatelessWidget {
   const MealsScreen({
@@ -25,7 +26,12 @@ class MealsScreen extends StatelessWidget {
               .map(
                 (meal) => MealItem(
                   meal: meal,
-                  onSelectMeal: (meal) {},
+                  onSelectMeal: (meal) => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (ctx) => MealDetailsScreen(meal: meal),
+                    ),
+                  ),
                 ),
               )
               .toList(),
