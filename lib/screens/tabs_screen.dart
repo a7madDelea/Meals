@@ -22,6 +22,12 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
+  void _onSelectPageFromDrawer(String id) {
+    if (id == 'Filters') {
+      Navigator.pop(context);
+    }
+  }
+
   void _showInfoMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -65,7 +71,9 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
-      drawer: const MainDrawer(),
+      drawer: MainDrawer(
+        onSelectPage: _onSelectPageFromDrawer,
+      ),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPageIndex,

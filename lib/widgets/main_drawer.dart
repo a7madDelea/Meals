@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({super.key});
+  const MainDrawer({super.key, required this.onSelectPage});
+
+  final void Function(String id) onSelectPage;
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Drawer(
       child: Column(
         children: [
@@ -13,11 +16,8 @@ class MainDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Theme.of(context).colorScheme.primaryContainer,
-                  Theme.of(context)
-                      .colorScheme
-                      .primaryContainer
-                      .withOpacity(.5),
+                  theme.colorScheme.primaryContainer,
+                  theme.colorScheme.primaryContainer.withOpacity(.5),
                 ],
               ),
             ),
@@ -30,11 +30,37 @@ class MainDrawer extends StatelessWidget {
                 const SizedBox(width: 16),
                 Text(
                   'Cooking UP!',
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                  style: theme.textTheme.titleLarge!.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
                 ),
               ],
+            ),
+          ),
+          ListTile(
+            onTap: () => onSelectPage('Meals'),
+            leading: Icon(
+              Icons.restaurant,
+              color: theme.colorScheme.onSurface,
+            ),
+            title: Text(
+              'Meals',
+              style: theme.textTheme.titleLarge!.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () => onSelectPage('Filters'),
+            leading: Icon(
+              Icons.settings,
+              color: theme.colorScheme.onSurface,
+            ),
+            title: Text(
+              'Filters',
+              style: theme.textTheme.titleLarge!.copyWith(
+                color: theme.colorScheme.primary,
+              ),
             ),
           ),
         ],
