@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';
+import '../models/meal_model.dart';
 
 class CategoryGridItem extends StatelessWidget {
-  const CategoryGridItem(
-      {super.key, required this.category, required this.onSelectCategory});
+  const CategoryGridItem({
+    super.key,
+    required this.category,
+    required this.onSelectCategory,
+    required this.availableMeals,
+  });
 
   final CategoryModel category;
   final void Function(CategoryModel category) onSelectCategory;
+  final List<MealModel> availableMeals;
 
   @override
   Widget build(BuildContext context) {
