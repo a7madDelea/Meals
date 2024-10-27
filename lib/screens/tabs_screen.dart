@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../providers/nav_bar_provider.dart';
 import '../models/meal_model.dart';
 import '../providers/favorites_provider.dart';
 import '../providers/filtered_provider.dart';
@@ -9,46 +10,18 @@ import 'categories_screen.dart';
 import 'filters_screen.dart';
 import 'meals_screen.dart';
 
-class TabsScreen extends ConsumerStatefulWidget {
+class TabsScreen extends ConsumerWidget {
   const TabsScreen({super.key});
 
   @override
-  ConsumerState<TabsScreen> createState() => _TabsScreenState();
-}
-
-class _TabsScreenState extends ConsumerState<TabsScreen> {
-  int _selectedPageIndex = 0;
-
-  void _selectPage(int index) {
-    setState(() {
-      _selectedPageIndex = index;
-    });
-  }
-
-  void _onSelectPageFromDrawer(String id) {
-    if (id == 'Filters') {
-      Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (ctx) => const FiltersScreen(),
-        ),
-      );
-    } else {
-      Navigator.pop(context);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final List<MealModel> availableMeals = ref.watch(filteredProvider);
-
+    final int selectedPageIndex = ref.watch(navBarProvider);
     Widget activePage = CategoriesScreen(
       availableMeals: availableMeals,
     );
     String activePageTitle = 'Pick your category';
-
-    if (_selectedPageIndex == 1) {
+    if (selectedPageIndex == 1) {
       final List<MealModel> favoritesMeals = ref.watch(favoritesProvider);
       activePage = MealsScreen(
         meals: favoritesMeals,
@@ -60,12 +33,24 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
         title: Text(activePageTitle),
       ),
       drawer: MainDrawer(
-        onSelectPage: _onSelectPageFromDrawer,
+        onSelectPage: (String id) {
+          if (id == 'Filters') {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (ctx) => const FiltersScreen(),
+              ),
+            );
+          } else {
+            Navigator.pop(context);
+          }
+        },
       ),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedPageIndex,
-        onTap: _selectPage,
+        currentIndex: selectedPageIndex,
+        onTap: ref.read(navBarProvider.notifier).selectPage,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.set_meal),
